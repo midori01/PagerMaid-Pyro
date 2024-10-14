@@ -1,7 +1,7 @@
 # PagerMaid-Pyro
 `Install`
 ```bash
-bash <(curl -sSLf "https://raw.githubusercontent.com/midori01/PagerMaid-Pyro/main/utils/install.sh")
+bash <(curl -sSLf "https://raw.githubusercontent.com/midori01/PagerMaid-Pyro/master/utils/install.sh")
 ```
 `Login`
 ```bash
