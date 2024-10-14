@@ -11,11 +11,26 @@ import re
     parameters="Provide the target to trace."
 )
 async def trace(message: Message):
-    """Use besttrace to perform network tracing."""
     def extract_ip(text):
         ip_pattern = re.compile(r"(?:\d{1,3}\.){3}\d{1,3}")
         match = ip_pattern.search(text)
         return match.group(0) if match else None
+
+    async def check_and_install_besttrace():
+        check_command = "command -v besttrace"
+        install_command = 'bash <(curl -sSLf "https://raw.githubusercontent.com/midori01/common-scripts/main/network/network.sh") besttrace'
+
+        try:
+            check_result = await execute(check_command)
+            if not check_result.strip():
+                await message.edit("Besttrace not found. Installing...")
+                install_result = await execute(install_command)
+                if "installed" not in install_result.lower():
+                    raise Exception("Installation failed or incomplete.")
+        except Exception as e:
+            await message.edit(f"Error during installation: {str(e)}")
+            return False
+        return True
 
     target = message.arguments
 
@@ -24,6 +39,9 @@ async def trace(message: Message):
     
     if not target:
         await message.edit("Error: No target specified or no IP found in the replied message.")
+        return
+    
+    if not await check_and_install_besttrace():
         return
     
     command = f"besttrace -g cn -q 1 {target}"
