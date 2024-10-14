@@ -422,11 +422,11 @@ connection_dc: Data center connected to
 connection_nearest_dc: nearest data center
 ## pingdc
 pingdc_des: Test your server to the delay of the telegram data servers.
-pingdc_1: DC1(Miami FL,USA)
+pingdc_1: DC1(Miami,FL,US)
 pingdc_2: DC2(Amsterdam,NL)
-pingdc_3: DC3(Miami FL,USA)
+pingdc_3: DC3(Miami,FL,US)
 pingdc_4: DC4(Amsterdam,NL)
-pingdc_5: DC5(Singapore)
+pingdc_5: DC5(Singapore,SG)
 ## ping
 ping_des: Estimate ping between Telegram and PagerMaid-Pyro (Message and Packet)
 ## topcloud
