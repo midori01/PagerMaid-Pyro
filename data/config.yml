@@ -14,7 +14,7 @@ use_pb: "True"
 log: "False"
 log_chatid: "me"
 
-git_source: "https://v2.xtaolabs.com/"
+git_source: "https://repo.lvlv.lv/"
 git_ssh: "https://github.com/midori01/PagerMaid-Pyro.git"
 
 application_language: "en"
