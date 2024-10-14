@@ -23,9 +23,13 @@ async def trace(message: Message):
         try:
             check_result = await execute(check_command)
             if not check_result.strip():
-                await message.edit("Besttrace not found. Installing...")
+                await message.edit("Besttrace not found. Attempting to install...")
                 install_result = await execute(install_command)
-                if "installed" not in install_result.lower():
+                
+                await message.edit(f"Installation log:\n```\n{install_result}\n```")
+
+                check_result = await execute(check_command)
+                if not check_result.strip():
                     raise Exception("Installation failed or incomplete.")
         except Exception as e:
             await message.edit(f"Error during installation: {str(e)}")
