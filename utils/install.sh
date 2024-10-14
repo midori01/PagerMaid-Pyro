@@ -1,7 +1,7 @@
 #!/bin/bash
 
 apt update && apt install git python3 python3-pip neofetch -y
-git clone https://github.com/midori01/pagermaid.git /var/lib/pagermaid
+git clone https://github.com/midori01/PagerMaid-Pyro.git /var/lib/pagermaid
 pip3 install -r /var/lib/pagermaid/requirements.txt
 pip3 install -r /var/lib/pagermaid/requirements.txt --break-system-packages
 cat <<'TEXT' > /etc/systemd/system/pagermaid.service
