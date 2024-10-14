@@ -30,6 +30,6 @@ if [[ "$modify_prefix" =~ ^[Yy]$ ]]; then
         echo "Cannot be empty."
         exit 1
     fi
-    sed -i.bak "s/,|，/${new_prefix}/g" /var/lib/pagermaid/pagermaid/listener.py
+    sed -i "s/,|，/${new_prefix}/g" /var/lib/pagermaid/pagermaid/listener.py
 fi
 echo "done"
