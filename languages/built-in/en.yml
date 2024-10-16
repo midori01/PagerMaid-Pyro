@@ -335,14 +335,14 @@ apt_reading_list: "Reading cloud plug-in list...complete\nreading local plug-in 
 apt_search_no_name: How can I search without a plug-in name?
 apt_search_not_found: No related plugins were found in the plugin repository.
 apt_search_result_hint: The following are the search results of the plugin repository
-apt_search_supporting: still in cycle
-apt_search_not_supporting: Abandoned treatment
-apt_plugin_name: plug-in name
+apt_search_supporting: maintained
+apt_search_not_supporting: abandoned
+apt_plugin_name: name
 apt_plugin_ver: version
 apt_plugin_section: category
-apt_plugin_maintainer: Author
+apt_plugin_maintainer: author
 apt_plugin_size: size
-apt_plugin_support: support period
+apt_plugin_support: support
 apt_plugin_des_short: description
 apt_source_des: "Add/Del/View Custom Plugin Sources."
 apt_source_parameters: "[add/del] [custom plugin source links]"
