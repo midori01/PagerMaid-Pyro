@@ -249,13 +249,13 @@ async def plugin(message: Message):
                     else:
                         search_support = lang("apt_search_not_supporting")
                     search_result = (
-                        f"{lang('apt_plugin_name')}:`{i.name}`\n"
-                        f"{lang('apt_plugin_ver')}:`Ver  {i.version}`\n"
-                        f"{lang('apt_plugin_section')}:`{i.section}`\n"
-                        f"{lang('apt_plugin_maintainer')}:`{i.maintainer}`\n"
-                        f"{lang('apt_plugin_size')}:`{i.size}`\n"
-                        f"{lang('apt_plugin_support')}:{search_support}\n"
-                        f"{lang('apt_plugin_des_short')}:{i.des_short}"
+                        f"{lang('apt_plugin_name')}: `{i.name}`\n"
+                        f"{lang('apt_plugin_ver')}: `{i.version}`\n"
+                        f"{lang('apt_plugin_section')}: `{i.section}`\n"
+                        f"{lang('apt_plugin_maintainer')}: `{i.maintainer}`\n"
+                        f"{lang('apt_plugin_size')}: `{i.size}`\n"
+                        f"{lang('apt_plugin_support')}: `{search_support}`\n"
+                        f"{lang('apt_plugin_des_short')}: `{i.des_short}`"
                     )
                     break
             if search_result == "":
