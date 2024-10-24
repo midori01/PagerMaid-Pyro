@@ -390,14 +390,14 @@ fbcon_error: Something went wrong ~ The file generation failed due to an unexpec
 status_des: Output the running status of PagerMaid-Pyro.
 status_online: online
 status_offline: offline
-status_hint: PagerMaid-Pyro running status
-status_name: Host name
-status_platform: Host platform
-status_release: Kernel version
-status_python: Python version
-status_telethon: Telethon version
-status_pyrogram: Pyrogram version
-status_pgm: PagerMaid version
+status_hint: PagerMaid-Pyro Running Status
+status_name: Hostname
+status_platform: Platform
+status_release: Kernel
+status_python: Python
+status_telethon: Telethon
+status_pyrogram: Pyrogram
+status_pgm: PagerMaid
 status_uptime: Uptime
 ## stats
 stats_des: View conversation statistics.
