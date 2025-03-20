@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 if [[ $EUID -ne 0 ]]
 then
     echo "错误：本脚本需要 root 权限执行。" 1>&2
