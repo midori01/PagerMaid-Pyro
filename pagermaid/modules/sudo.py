@@ -10,6 +10,7 @@ from pagermaid.group_manager import (
     add_permission_for_user,
     remove_permission_for_user,
     permissions,
+    rename_group,
 )
 from pagermaid.listener import listener
 from pagermaid.utils import lang
@@ -27,7 +28,7 @@ def from_msg_get_sudo_id(message: Message) -> int:
     is_plugin=False,
     command="sudo",
     need_admin=True,
-    parameters="{on|off|add|remove|gaddp|gaddu|gdelp|gdelu|glist|uaddp|udelp|list}",
+    parameters="{on|off|add|remove|gaddp|gaddu|gdelp|gdelu|glist|grename|uaddp|udelp|list}",
     description=lang("sudo_des"),
 )
 async def sudo_change(message: Message):
@@ -232,7 +233,7 @@ async def sudo_udelp(message: Message):
     command="gaddp",
     need_admin=True,
 )
-@check_parameter_length(3, False)
+@check_parameter_length(3, True)
 async def sudo_gaddp(message: Message):
     add_permission_for_group(message.parameter[1], Permission(message.parameter[2]))
     return await message.edit(lang("sudo_group_add_per"))
@@ -243,7 +244,20 @@ async def sudo_gaddp(message: Message):
     command="gdelp",
     need_admin=True,
 )
-@check_parameter_length(3, False)
+@check_parameter_length(3, True)
 async def sudo_gdelp(message: Message):
     remove_permission_for_group(message.parameter[1], Permission(message.parameter[2]))
     return await message.edit(lang("sudo_group_del_per"))
+
+
+@sudo_change.sub_command(
+    is_plugin=False,
+    command="grename",
+    need_admin=True,
+)
+@check_parameter_length(3, True)
+async def sudo_grename(message: Message):
+    old_name = message.parameter[1]
+    new_name = message.parameter[2]
+    rename_group(old_name, new_name)
+    await message.edit(lang("sudo_group_rename_per"))
