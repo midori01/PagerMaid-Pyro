@@ -4,7 +4,7 @@ import re
 from datetime import datetime
 from getpass import getuser
 from platform import uname, python_version
-from shutil import disk_usage
+from shutil import disk_usage, which
 from socket import gethostname
 from subprocess import Popen, PIPE
 from sys import platform
@@ -16,7 +16,7 @@ from pyrogram.enums import ChatType
 from pyrogram.enums.parse_mode import ParseMode
 from pyrogram.raw.functions import Ping
 
-from pagermaid.common.status import get_bot_uptime
+from pagermaid.common.status import get_status
 from pagermaid.config import Config
 from pagermaid.enums import Client, Message
 from pagermaid.listener import listener
@@ -34,12 +34,19 @@ DCs = {
 
 @listener(is_plugin=False, command="sysinfo", description=lang("sysinfo_des"))
 async def sysinfo(message: Message):
-    """Retrieve system information via neofetch."""
+    """Retrieve system information via fastfetch or neofetch."""
     if not Config.SILENT:
         message = await message.edit(lang("sysinfo_loading"))
-    if platform == "win32":
+    if which("fastfetch"):
+        result = await execute(
+            "fastfetch --config none --logo none --pipe --structure title:separator:os:kernel:uptime:loadavg:packages:initsystem:shell:locale:processes:memory:swap:disk:netio"
+        )
+    elif platform == "win32":
         return await message.edit(neofetch_win(), parse_mode=ParseMode.HTML)
-    result = await execute("neofetch --config none --stdout")
+    elif which("neofetch"):
+        result = await execute("neofetch --config none --stdout")
+    else:
+        result = lang("sysinfo_not_found")
     await message.edit(f"`{result}`")
 
 
@@ -48,7 +55,7 @@ async def status(message: Message):
     # database
     # database = lang('status_online') if redis_status() else lang('status_offline')
     # uptime https://gist.github.com/borgstrom/936ca741e885a1438c374824efb038b3
-    uptime = await get_bot_uptime()
+    status_data = await get_status()
     text = (
         f"**{lang('status_hint')}** \n"
         f"{lang('status_name')}: `{uname().node}` \n"
@@ -56,8 +63,13 @@ async def status(message: Message):
         f"{lang('status_release')}: `{uname().release}` \n"
         f"{lang('status_python')}: `{python_version()}` \n"
         f"{lang('status_pyrogram')}: `{__version__}` \n"
-        f"{lang('status_pgm')}: `{pgm_version}`\n"
-        f"{lang('status_uptime')}: `{uptime}`"
+        f"{lang('status_pgm')}: `{status_data.version}`\n"
+        f"{lang('status_cpu')}: `{status_data.cpu_percent}`\n"
+        f"{lang('status_ram')}: `{status_data.ram_percent}`\n"
+        f"{lang('status_swap')}: `{status_data.swap_percent}`\n"
+        f"{lang('status_process_cpu')}: `{status_data.process_cpu_percent}`\n"
+        f"{lang('status_process_ram')}: `{status_data.process_ram_percent}`\n"
+        f"{lang('status_uptime')}: `{status_data.run_time}`"
     )
     await message.edit(text)
 
