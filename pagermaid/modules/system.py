@@ -30,8 +30,9 @@ code_result = (
     command="sh",
     need_admin=True,
     description=lang("sh_des"),
-    parameters=lang("sh_parameters"),)
-async def sh(message: Message):
+    parameters=lang("sh_parameters"),
+)
+async def sh(message: "Message"):
     """Use the command-line from Telegram."""
     user = getuser()
     command = message.arguments
