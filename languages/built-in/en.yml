@@ -324,6 +324,7 @@ apt_plugin_list: plugins list
 apt_plugin_running: running
 apt_plugin_disabled: disabled
 apt_plugin_failed: failed to load
+apt_plugin_not_installed: not installed
 apt_enable: enabled
 apt_disable: disabled
 apt_uploading: uploading plugin...
