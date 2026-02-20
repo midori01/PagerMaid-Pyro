@@ -1,6 +1,6 @@
 [project]
 name = "PagerMaid-Pyro"
-version = "1.5.5"
+version = "1.5.9"
 description = "Advanced Multi-Featured Telegram UserBot by pyrogram."
 authors = [
     {name = "xtaodada", email = "xtao@xtao.de"},
@@ -13,18 +13,20 @@ dependencies = [
     "pytz>=2024.2",
     "PyYAML>=6.0.2",
     "coloredlogs>=15.0.1",
-    "psutil>=6.0.0",
+    "psutil>=7.1.0",
     "httpx[socks]>=0.27.2",
     "apscheduler>=3.10.4",
     "sqlitedict>=2.1.0",
     "casbin>=1.36.3",
-    "sentry-sdk>=2.14.0",
+    "sentry-sdk>=2.40.0",
     "PyQRCode>=1.2.1",
     "PyPng",
-    "fastapi>=0.115.5",
+    "fastapi>=0.118.1",
     "amis-python @ git+https://github.com/TeamPGM/amis-python",
-    "uvicorn>=0.32.0",
-    "starlette>=0.41.2",
+    "uvicorn>=0.33.0; python_version < '3.9'",
+    "uvicorn>=0.37.0; python_version >= '3.9'",
+    "starlette>=0.44.0; python_version < '3.9'",
+    "starlette>=0.48.0; python_version >= '3.9'",
     "pyjwt>=2.9.0",
 ]
 requires-python = ">=3.8.0"
@@ -33,7 +35,7 @@ license = {text = "AGPL 3.0+"}
 
 [dependency-groups]
 dev = [
-    "ruff>=0.12.5",
+    "ruff>=0.14.0",
 ]
 
 [tool.pdm]
