@@ -37,28 +37,28 @@ async def sh(message: "Message"):
     user = getuser()
     command = message.arguments
     hostname = node()
-
+    
     if not command:
         await message.edit(lang("arg_error"))
         return
-
+    
     message = await message.edit(f"`{user}`@{hostname} ~\n> `$` {command}")
-
+    
     result = await execute(command)
-
+    
     if result:
         final_result = None
-        if len(result) > 3072:
-            if Config.USE_PB:
-                url = await paste_pb(result)
-                if url:
-                    final_result = html.escape(f"{url}/bash")
+        if len(result) > 3072 and Config.USE_PB:
+            url = await paste_pb(result)
+            if url:
+                final_result = f"[Result too long, view here]({url}/bash)"
         else:
-            final_result = f"<code>{html.escape(result)}</code>"
-
+            final_result = f"```\n{result}\n```"
+        
         if (len(result) > 3072 and not Config.USE_PB) or final_result is None:
             await attach_log(result, message.chat.id, "output.log", message.id)
             return
+        
         await message.edit(f"`{user}`@{hostname} ~\n> `#` {command}\n\n{final_result}")
     else:
         return

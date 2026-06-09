@@ -372,6 +372,36 @@ async def plugin_list(message: "Message"):
             page = int(message.parameter[1])
         except ValueError:
             await message.edit(lang("arg_error"))
+    elif message.parameter[0] == "show":
+        if len(message.parameter) == 1:
+            await message.edit(lang("apt_search_no_name"))
+        elif len(message.parameter) == 2:
+            await plugin_manager.load_remote_plugins()
+            search_result = ""
+            plugin_name = message.parameter[1]
+            for i in plugin_manager.remote_plugins:
+                if plugin_name == i.name:
+                    if i.supported:
+                        search_support = lang("apt_search_supporting")
+                    else:
+                        search_support = lang("apt_search_not_supporting")
+                    search_result = (
+                        f"{lang('apt_plugin_name')}: `{i.name}`\n"
+                        f"{lang('apt_plugin_ver')}: `{i.version}`\n"
+                        f"{lang('apt_plugin_section')}: `{i.section}`\n"
+                        f"{lang('apt_plugin_maintainer')}: `{i.maintainer}`\n"
+                        f"{lang('apt_plugin_size')}: `{i.size}`\n"
+                        f"{lang('apt_plugin_support')}: `{search_support}`\n"
+                        f"{lang('apt_plugin_des_short')}: `{i.des_short}`"
+                    )
+                    break
+            if search_result == "":
+                await message.edit(lang("apt_search_not_found"))
+            else:
+                await message.edit(search_result)
+    elif message.parameter[0] == "export":
+        if not exists(f"{plugin_directory}version.json"):
+            await message.edit(lang("apt_why_not_install_a_plugin"))
             return
 
     page_size = 15
